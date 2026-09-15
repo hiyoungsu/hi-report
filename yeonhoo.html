@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+  @page {
+    size: A4;
+    margin: 12mm 14mm;
+    background-color: #f8fafc;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', sans-serif;
+    color: #1e293b;
+    margin: 0;
+    padding: 0;
+    line-height: 1.5;
+    font-size: 10pt;
+  }
+  
+  .header {
+    background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+    color: #ffffff;
+    padding: 20px 24px;
+    border-radius: 12px;
+    margin-bottom: 16px;
+  }
+  .header-sub {
+    font-size: 8.5pt;
+    letter-spacing: 1.5px;
+    color: #93c5fd;
+    font-weight: 800;
+    margin-bottom: 4px;
+  }
+  .header-title-row {
+    display: table;
+    width: 100%;
+  }
+  .header-left {
+    display: table-cell;
+    vertical-align: middle;
+  }
+  .header-right {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: right;
+  }
+  .header-title {
+    font-size: 20pt;
+    font-weight: 800;
+    margin: 0 0 6px 0;
+    color: #ffffff;
+  }
+  .header-desc {
+    font-size: 9.5pt;
+    color: #cbd5e1;
+    margin: 0;
+  }
+  .student-badge {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    padding: 10px 16px;
+    border-radius: 8px;
+    text-align: right;
+  }
+  .student-name {
+    font-size: 13pt;
+    font-weight: 800;
+    color: #ffffff;
+  }
+  .student-meta {
+    font-size: 8.5pt;
+    color: #94a3b8;
+    margin-top: 2px;
+  }
+
+  .section-title {
+    font-size: 12pt;
+    font-weight: 800;
+    color: #0f172a;
+    margin: 16px 0 10px 0;
+    padding-left: 10px;
+    border-left: 4px solid #ea580c;
+  }
+
+  .summary-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 14px 18px;
+    font-size: 9.5pt;
+    line-height: 1.6;
+    color: #334155;
+    margin-bottom: 14px;
+  }
+
+  /* Grid of core metrics */
+  .grid-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 8px;
+    margin-bottom: 14px;
+  }
+  .metric-cell {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 12px 14px;
+    width: 33.33%;
+    vertical-align: top;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+  }
+  .metric-tag {
+    font-size: 8pt;
+    color: #64748b;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .metric-val {
+    font-size: 11pt;
+    font-weight: 800;
+    color: #0f172a;
+    margin-bottom: 4px;
+  }
+  .metric-growth {
+    font-size: 8.5pt;
+    color: #ea580c;
+    font-weight: 700;
+    background: #fff7ed;
+    padding: 2px 6px;
+    border-radius: 4px;
+    display: inline-block;
+  }
+
+  /* Domain detailed cards */
+  .domain-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-bottom: 10px;
+    page-break-inside: avoid;
+  }
+  .domain-header {
+    display: table;
+    width: 100%;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #f1f5f9;
+  }
+  .domain-title-wrap {
+    display: table-cell;
+    vertical-align: middle;
+  }
+  .domain-icon {
+    display: inline-block;
+    width: 26px;
+    height: 26px;
+    line-height: 26px;
+    text-align: center;
+    border-radius: 6px;
+    font-weight: 800;
+    font-size: 10pt;
+    color: #fff;
+    margin-right: 8px;
+  }
+  .icon-v { background-color: #ea580c; }
+  .icon-g { background-color: #0284c7; }
+  .icon-l { background-color: #0d9488; }
+  .icon-r { background-color: #7c3aed; }
+  
+  .domain-name {
+    font-size: 11pt;
+    font-weight: 800;
+    color: #0f172a;
+    display: inline-block;
+  }
+  .domain-sub {
+    font-size: 8.5pt;
+    color: #64748b;
+    margin-left: 6px;
+  }
+  .domain-badge {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: right;
+  }
+  .badge-growth {
+    background: #ecfdf5;
+    color: #059669;
+    border: 1px solid #a7f3d0;
+    font-size: 8pt;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 6px;
+  }
+
+  .detail-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 10px;
+  }
+  .detail-table th {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    padding: 6px 10px;
+    font-size: 8.5pt;
+    color: #475569;
+    text-align: center;
+  }
+  .detail-table td {
+    border: 1px solid #e2e8f0;
+    padding: 7px 10px;
+    font-size: 9pt;
+    text-align: center;
+    color: #1e293b;
+  }
+  .highlight-cell {
+    font-weight: 800;
+    color: #ea580c;
+  }
+
+  .commentary-box {
+    background: #f8fafc;
+    border-left: 3px solid #cbd5e1;
+    padding: 8px 12px;
+    margin-top: 6px;
+    border-radius: 0 6px 6px 0;
+  }
+  .commentary-box.green {
+    border-left-color: #10b981;
+    background: #f0fdf4;
+  }
+  .commentary-box.orange {
+    border-left-color: #ea580c;
+    background: #fff7ed;
+  }
+  .box-label {
+    font-size: 8pt;
+    font-weight: 800;
+    margin-bottom: 2px;
+  }
+  .label-green { color: #059669; }
+  .label-orange { color: #c2410c; }
+  .box-text {
+    font-size: 8.5pt;
+    color: #334155;
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  /* Bottom Roadmap */
+  .roadmap-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 8px;
+    margin-top: 8px;
+  }
+  .roadmap-cell {
+    width: 50%;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 14px 16px;
+    vertical-align: top;
+  }
+  .roadmap-title {
+    font-size: 10pt;
+    font-weight: 800;
+    color: #0f172a;
+    margin-bottom: 6px;
+  }
+  .roadmap-text {
+    font-size: 8.5pt;
+    color: #475569;
+    line-height: 1.55;
+    margin: 0;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-sub">하이영수학원 LEARNING REPORT</div>
+  <div class="header-title-row">
+    <div class="header-left">
+      <h1 class="header-title">NELT 영어 성장 리포트</h1>
+      <p class="header-desc">2차례의 누적 성취도 결과를 바탕으로 성장한 지점과 향후 학습 방향을 정리했습니다.</p>
+    </div>
+    <div class="header-right">
+      <div class="student-badge">
+        <div class="student-name">이연후</div>
+        <div class="student-meta">초등 4학년 (2016년생)</div>
+        <div class="student-meta">2026.03 &rarr; 2026.08.22</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-title">전체 성장 요약</div>
+<div class="summary-card">
+  연후는 지난 5개월 동안 놀라운 학업 성취를 이루어내며 <strong>종합 실력이 Lv. 1(초2 이하)에서 Lv. 3(초5~초6 선행)으로 2단계 수직 상승</strong>했습니다. 전국 동 학년 석차 역시 상위 82%에서 <strong>상위 26%의 상위권으로 +56%p 대도약</strong>했습니다. 특히 <strong>독해(상위 94% &rarr; 33%)</strong>와 <strong>문법(상위 66% &rarr; 19%)</strong> 영역에서 압도적인 성장을 기록하며, 기초 과정을 완벽히 마스터하고 초등 고학년 수준의 긴 지문과 복합 문장을 주도적으로 분석하는 역량을 갖추게 되었습니다.
+</div>
+
+<div class="section-title">핵심 성장 지표</div>
+<table class="grid-table">
+  <tr>
+    <td class="metric-cell">
+      <div class="metric-tag">종합 평가 (Overall Level)</div>
+      <div class="metric-val">Lv. 1 &rarr; Lv. 3 (초5~6 수준)</div>
+      <div class="metric-growth">+2개 레벨 수직 상승 (선행 도달)</div>
+    </td>
+    <td class="metric-cell">
+      <div class="metric-tag">전국 동 학년 석차 (Rank)</div>
+      <div class="metric-val">상위 82% &rarr; 상위 26%</div>
+      <div class="metric-growth">+56%p 상승 (상위 20%대 진입)</div>
+    </td>
+    <td class="metric-cell">
+      <div class="metric-tag">독해 실력 (Reading)</div>
+      <div class="metric-val">초1~2 &rarr; 초5~6 수준</div>
+      <div class="metric-growth">상위 94% &rarr; 33% (+61%p 점프)</div>
+    </td>
+  </tr>
+  <tr>
+    <td class="metric-cell">
+      <div class="metric-tag">문법 실력 (Grammar)</div>
+      <div class="metric-val">초3~4 &rarr; 초5~6 수준</div>
+      <div class="metric-growth">상위 19% 최상위권 진입</div>
+    </td>
+    <td class="metric-cell">
+      <div class="metric-tag">필수 문법 이해도</div>
+      <div class="metric-val">65% &rarr; 90% 이해</div>
+      <div class="metric-growth">+25%p 증가 (초등 문법 완성)</div>
+    </td>
+    <td class="metric-cell">
+      <div class="metric-tag">어휘량 (Vocabulary Size)</div>
+      <div class="metric-val">약 300단어 &rarr; 약 550단어</div>
+      <div class="metric-growth">+250단어 증가 (83% 급성장)</div>
+    </td>
+  </tr>
+</table>
+
+<div class="section-title">영역별 세부 변화 및 다음 학습 계획</div>
+
+<!-- Reading -->
+<div class="domain-card">
+  <div class="domain-header">
+    <div class="domain-title-wrap">
+      <span class="domain-icon icon-r">R</span>
+      <span class="domain-name">독해 영역 변화 (Reading)</span>
+      <span class="domain-sub">대의 파악 &bull; 세부 내용 이해 &bull; 추론 능력</span>
+    </div>
+    <div class="domain-badge">
+      <span class="badge-growth">가장 비약적인 성장 &#9733;</span>
+    </div>
+  </div>
+  <table class="detail-table">
+    <thead>
+      <tr>
+        <th>평가 구분</th>
+        <th>Reading 수준</th>
+        <th>동 학년 석차</th>
+        <th>학업 성취도 (6학년 기준)</th>
+        <th>변화 성과</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1차 (2026.03)</td>
+        <td>초1~2 수준</td>
+        <td>상위 94%</td>
+        <td>진단평가 비대상</td>
+        <td rowspan="2" class="highlight-cell">수준 2단계 도약<br>석차 +61%p 수직 상승</td>
+      </tr>
+      <tr>
+        <td>2차 (2026.08.22)</td>
+        <td><strong>초5~6 수준</strong></td>
+        <td><strong>상위 33%</strong></td>
+        <td><strong>보통 학력</strong></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="commentary-box green">
+    <div class="box-label label-green">성장 설명</div>
+    <p class="box-text">3월 초기 단문 읽기에서 벗어나 문장 간의 유기적 관계와 지문의 중심 생각을 짚어내는 힘이 비약적으로 성장했습니다. 동 학년 응시자 대비 상위 33%에 올라서며 초등 고학년 수준의 탄탄한 독해력을 완성했습니다.</p>
+  </div>
+  <div class="commentary-box orange">
+    <div class="box-label label-orange">다음 학습 계획</div>
+    <p class="box-text">문단별 핵심 문장(Topic Sentence)을 찾아 논리적 근거를 파악하는 훈련과 함께, 중등 연계 설명문 및 스토리 지문 독해로 지문 범위를 넓혀가겠습니다.</p>
+  </div>
+</div>
+
+<!-- Grammar -->
+<div class="domain-card">
+  <div class="domain-header">
+    <div class="domain-title-wrap">
+      <span class="domain-icon icon-g">G</span>
+      <span class="domain-name">문법 영역 변화 (Grammar)</span>
+      <span class="domain-sub">기초 문장 구조 &bull; 문법 이해율 &bull; 어법 판단력</span>
+    </div>
+    <div class="domain-badge">
+      <span class="badge-growth">상위 19% 최상위권 달성</span>
+    </div>
+  </div>
+  <table class="detail-table">
+    <thead>
+      <tr>
+        <th>평가 구분</th>
+        <th>Grammar 수준</th>
+        <th>동 학년 석차</th>
+        <th>필수 문법 이해율</th>
+        <th>변화 성과</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1차 (2026.03)</td>
+        <td>초3~4 수준</td>
+        <td>상위 66%</td>
+        <td>약 65% 이해</td>
+        <td rowspan="2" class="highlight-cell">석차 상위 19% 도약<br>초등 문법 90% 완성</td>
+      </tr>
+      <tr>
+        <td>2차 (2026.08.22)</td>
+        <td><strong>초5~6 수준</strong></td>
+        <td><strong>상위 19%</strong></td>
+        <td><strong>약 90% 이해</strong></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="commentary-box green">
+    <div class="box-label label-green">성장 설명</div>
+    <p class="box-text">초등 필수 문법 항목의 90%를 완벽히 이해하며 연후의 가장 강력한 핵심 무기가 되었습니다. 문장의 기본 구조와 품사의 쓰임을 논리적으로 분석해 정답을 이끌어내는 힘이 매우 탁월합니다.</p>
+  </div>
+  <div class="commentary-box orange">
+    <div class="box-label label-orange">다음 학습 계획</div>
+    <p class="box-text">중등 핵심 문법인 to부정사, 동명사, 접속사 구문을 문장 패턴 드릴 연습으로 연계하여 독해와 영작에 자유자재로 적용하도록 훈련하겠습니다.</p>
+  </div>
+</div>
+
+<!-- Vocabulary -->
+<div class="domain-card">
+  <div class="domain-header">
+    <div class="domain-title-wrap">
+      <span class="domain-icon icon-v">V</span>
+      <span class="domain-name">어휘 영역 변화 (Vocabulary)</span>
+      <span class="domain-sub">Vocabulary Size &bull; 필수 어휘 이해율 &bull; 문맥 활용 능력</span>
+    </div>
+    <div class="domain-badge">
+      <span class="badge-growth">어휘량 83% 증가</span>
+    </div>
+  </div>
+  <table class="detail-table">
+    <thead>
+      <tr>
+        <th>평가 구분</th>
+        <th>어휘량 (Size)</th>
+        <th>수준 (학년)</th>
+        <th>동 학년 석차</th>
+        <th>필수 어휘(800자)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1차 (2026.03)</td>
+        <td>약 300단어</td>
+        <td>초등 2학년</td>
+        <td>상위 90%</td>
+        <td>약 20% 이해</td>
+      </tr>
+      <tr>
+        <td>2차 (2026.08.22)</td>
+        <td><strong>약 550단어</strong></td>
+        <td><strong>초등 3학년</strong></td>
+        <td><strong>상위 78%</strong></td>
+        <td><strong>약 31% 이해</strong></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="commentary-box green">
+    <div class="box-label label-green">성장 설명</div>
+    <p class="box-text">단어량이 300단어에서 550단어로 크게 증가하면서 독해 지문을 읽을 때의 막힘 현상이 눈에 띄게 완화되었습니다. 꾸준한 단어 암기 습관이 확실하게 형성되었습니다.</p>
+  </div>
+  <div class="commentary-box orange">
+    <div class="box-label label-orange">다음 학습 계획</div>
+    <p class="box-text">현재의 우수한 문법·독해력에 발맞추어 초등 필수 800단어를 완전 마스터하고, 중등 기본 단어군까지 어휘 확장을 가속화하겠습니다.</p>
+  </div>
+</div>
+
+<!-- Listening -->
+<div class="domain-card">
+  <div class="domain-header">
+    <div class="domain-title-wrap">
+      <span class="domain-icon icon-l">L</span>
+      <span class="domain-name">듣기 영역 변화 (Listening)</span>
+      <span class="domain-sub">상황 파악 &bull; 세부 정보 청취 &bull; 대의 파악</span>
+    </div>
+    <div class="domain-badge">
+      <span class="badge-growth">6학년 성취도 '우수' 달성</span>
+    </div>
+  </div>
+  <table class="detail-table">
+    <thead>
+      <tr>
+        <th>평가 구분</th>
+        <th>Listening 수준</th>
+        <th>동 학년 석차</th>
+        <th>학업 성취도 예상 등급</th>
+        <th>변화 성과</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1차 (2026.03)</td>
+        <td>초3~4 수준</td>
+        <td>상위 92%</td>
+        <td>4학년 기준 '우수'</td>
+        <td rowspan="2" class="highlight-cell">초5~6 선행 레벨 도달<br>6학년 기준 '우수' 등급</td>
+      </tr>
+      <tr>
+        <td>2차 (2026.08.22)</td>
+        <td><strong>초5~6 수준</strong></td>
+        <td><strong>상위 76%</strong></td>
+        <td><strong>6학년 기준 '우수'</strong></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="commentary-box green">
+    <div class="box-label label-green">성장 설명</div>
+    <p class="box-text">대화와 담화의 맥락 파악력이 매우 훌륭합니다. 국가 수준 학업 성취도 평가(6학년 기준)에서도 '우수' 등급을 받을 만큼 선행 청취 이해도가 훌륭히 유지되고 있습니다.</p>
+  </div>
+  <div class="commentary-box orange">
+    <div class="box-label label-orange">다음 학습 계획</div>
+    <p class="box-text">음원을 들으며 핵심 정보를 즉시 캐치하는 노트테이킹 훈련과 함께, 다양한 표현의 실전 대화 듣기 훈련을 이어가겠습니다.</p>
+  </div>
+</div>
+
+<table class="roadmap-table">
+  <tr>
+    <td class="roadmap-cell">
+      <div class="roadmap-title">&#128077; 종합 성장 총평</div>
+      <p class="roadmap-text">
+        지난 5개월간 연후는 기초 학습 단계를 완벽히 졸업하고 초등 5~6학년 선행 수준(상위 26%)에 성공적으로 안착했습니다. 특히 문법(상위 19%)과 독해(+61%p 상승)의 수직 성장은 연후가 수업 내용을 흡수하는 자기주도적 역량이 대단히 뛰어나다는 것을 보여줍니다.
+      </p>
+    </td>
+    <td class="roadmap-cell">
+      <div class="roadmap-title">&#128640; 향후 집중 지도 로드맵</div>
+      <p class="roadmap-text">
+        1. 어휘: 초등 필수 800단어 마스터 및 중등 기본 어휘 확장<br>
+        2. 문법: 중등 기본 문형(to부정사, 동명사 등) 패턴화 체득<br>
+        3. 독해: 긴 호흡 지문의 중심 내용 및 문맥 논리 파악 연습<br>
+        연후의 뛰어난 잠재력이 최상위권 실력으로 이어지도록 정성껏 지도하겠습니다.
+      </p>
+    </td>
+  </tr>
+</table>
+
+</body>
+</html>
